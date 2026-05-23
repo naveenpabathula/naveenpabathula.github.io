@@ -8,284 +8,270 @@
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
         :root {
-            --bg-color: #F4F1EA;
-            --text-color: #1A1A1A;
-            --meta-color: #555555;
-            --dot-color: #A0A0A0;
-            --border-color: #1A1A1A;
-            --footer-border: #DCD9D2;
+            --bg:    #FAFAF8;
+            --text:  #111111;
+            --muted: #999999;
+            --rule:  #E5E5E2;
         }
 
         [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #EAEAEA;
-            --meta-color: #A0A0A0;
-            --dot-color: #444444;
-            --border-color: #EAEAEA;
-            --footer-border: #2A2A2A;
+            --bg:    #111111;
+            --text:  #E8E8E6;
+            --muted: #666662;
+            --rule:  #222220;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background: var(--bg);
+            color: var(--text);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 0;
-            padding: 4vw;
+            font-size: 13.5px;
+            line-height: 1.75;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            transition: background 0.2s, color 0.2s;
         }
 
-        #ledger-container {
+        .page {
+            max-width: 960px;
             width: 100%;
-            max-width: 100%;
-            flex-grow: 1;
+            margin: 0 auto;
+            padding: 64px 32px 80px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 16px;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--rule);
         }
 
-
-
-        .header-left {
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .header-title strong {
-            font-size: 22px;
+        header strong {
+            font-size: 24px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        .header-title span {
-            color: var(--meta-color);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: baseline;
-            gap: 24px;
-        }
-
-        .header-location {
-            color: var(--meta-color);
-            font-size: 14px;
+            letter-spacing: 0.08em;
         }
 
         .theme-toggle {
             cursor: pointer;
-            font-weight: 700;
-            user-select: none;
             background: none;
             border: none;
-            color: var(--text-color);
+            color: var(--muted);
             font-family: inherit;
-            font-size: 14px;
+            font-size: 12px;
             padding: 0;
+            transition: color 0.15s;
         }
-        .theme-toggle::before { content: "["; color: var(--meta-color); }
-        .theme-toggle::after { content: "]"; color: var(--meta-color); }
-        .theme-toggle:hover { background-color: var(--text-color); color: var(--bg-color); }
 
-        section {
+        .theme-toggle:hover { color: var(--text); }
+
+        /* Bio */
+        .bio {
+            margin-bottom: 32px;
+            max-width: 680px;
+        }
+
+        .bio p {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        .bio p + p { margin-top: 14px; }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
             margin-bottom: 56px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--rule);
+            flex-wrap: wrap;
+            gap: 4px;
+
         }
 
-        h2 {
-            font-size: 15px;
+        .tl-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .tl-company {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tl-year {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .tl-arrow {
+            color: var(--muted);
+            font-size: 12px;
+            padding: 0 6px;
+            padding-bottom: 14px;
+            align-self: flex-end;
+            letter-spacing: -2px;
+        }
+
+        /* Two column layout */
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 0 20px 0;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            margin-bottom: 16px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .book-list {
+            list-style: disc;
+            padding-left: 18px;
         }
 
-        li {
-            margin-bottom: 12px;
+        .book-list li {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: var(--text);
         }
 
-        /* Bio section */
-        .bio-block {
-            max-width: 680px;
-            line-height: 1.8;
-            color: var(--text-color);
+        .book-author { color: var(--muted); }
+
+        .project-list {
+            list-style: disc;
+            padding-left: 18px;
         }
 
-        .bio-block p {
-            margin: 0 0 12px 0;
+        .project-list li {
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: var(--text);
         }
 
-        /* Ledger rows */
-        .ledger-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 12px;
-            width: 100%;
+        .project-desc {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 1px;
+            margin-bottom: 8px;
         }
-
-        .ledger-target {
-            display: flex;
-            flex-grow: 1;
-            align-items: baseline;
-            font-weight: 500;
-        }
-
-        .ledger-target::after {
-            content: " ";
-            flex-grow: 1;
-            border-bottom: 1px dotted var(--dot-color);
-            margin: 0 16px;
-            position: relative;
-            top: -4px;
-        }
-
-        .status-meta {
-            color: var(--meta-color);
-            white-space: nowrap;
-        }
-
-        .status-bracket {
-            color: var(--text-color);
-            font-weight: 700;
-        }
-
 
         footer {
             margin-top: auto;
-            padding-top: 32px;
-            border-top: 1px solid var(--footer-border);
+            padding-top: 40px;
+            border-top: 2px solid var(--rule);
             display: flex;
-            justify-content: flex-start;
             gap: 24px;
-            width: 100%;
         }
 
         footer a {
-            color: var(--text-color);
+            color: var(--muted);
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.15s ease;
+            font-size: 12px;
+            transition: color 0.15s;
         }
 
-        footer a::before { content: "["; color: var(--meta-color); }
-        footer a::after { content: "]"; color: var(--meta-color); }
+        footer a:hover { color: var(--text); }
 
-        footer a:hover { background-color: var(--text-color); color: var(--bg-color); }
-        footer a:hover::before, footer a:hover::after { color: var(--bg-color); }
-
-        @media (max-width: 850px) {
-            body { padding: 24px; }
-
-            header {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-                margin-bottom: 32px;
-            }
-
-            .header-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .header-title span {
-                display: block;
-                margin-left: 0;
-                margin-top: 4px;
-                font-size: 13px;
-            }
-
-            .ledger-row {
-                flex-direction: column;
-                align-items: flex-start;
-                margin-bottom: 16px;
-                border-bottom: 1px dashed var(--footer-border);
-                padding-bottom: 8px;
-            }
-
-            .ledger-target::after { display: none; }
-            .status-meta { margin-top: 4px; font-size: 13px; }
-            .log-entry { max-width: 100%; }
-            footer { justify-content: space-between; gap: 8px; }
-            .bio-tags { gap: 6px; }
+        @media (max-width: 640px) {
+            .page { padding: 40px 24px 56px; }
+            header { margin-bottom: 40px; }
+            .bio { margin-bottom: 24px; }
+            .timeline { margin-bottom: 40px; }
+            .columns { grid-template-columns: 1fr; gap: 40px; }
         }
     </style>
 </head>
 <body>
+<div class="page">
 
-    <div id="ledger-container">
-        <header>
-            <div class="header-left">
-                <div class="header-title">
-                    <strong>Naveen Pabathula</strong>
-                </div>
-            </div>
-            <div class="header-right">
-                <button class="theme-toggle" id="mode-switcher" onclick="toggleTheme()">DARK</button>
-            </div>
-        </header>
+    <header>
+        <strong>Naveen Pabathula</strong>
+        <button class="theme-toggle" id="mode-switcher" onclick="toggleTheme()">dark</button>
+    </header>
+
+    <div class="bio">
+        <p>I'm a Data Engineer and Technical Lead based in Hyderabad with about six years in the field. Started at TCS where I spent nearly five years getting my hands dirty across data pipelines and testing — the kind of work that teaches you how things actually break. Moved to Rythmos as an Associate Consultant, and now at Coforge leading a team working on real-time data pipelines ingesting from multiple Kafka sources.</p>
+        <p>Outside work I read, build small projects, and learn about how systems hold together in different circumstances.</p>
+    </div>
+
+    <div class="timeline">
+        <span class="tl-item">
+            <span class="tl-company">TCS</span>
+            <span class="tl-year">2019</span>
+        </span>
+        <span class="tl-arrow">───────</span>
+        <span class="tl-item">
+            <span class="tl-company">Rythmos</span>
+            <span class="tl-year">2024</span>
+        </span>
+        <span class="tl-arrow">───────</span>
+        <span class="tl-item">
+            <span class="tl-company">Coforge</span>
+            <span class="tl-year">2025 →</span>
+        </span>
+    </div>
+
+    <div class="columns">
 
         <section>
-            <div class="bio-block">
-                <p>Data Engineer and Technical Lead based in Hyderabad. Currently working on real-time data pipelines ingesting from multiple Kafka sources — testing, validating, and ensuring data integrity at scale.</p>
-                <p>Interested in the intersection of Data Engineering, AI, and Systems Architecture. Outside of work: reading books, building personal projects, and thinking about how systems — technical or otherwise — actually hold together.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>/Now</h2>
-            <ul>
-                <li>• <strong>Work:</strong> Optimizing AWS Glue crawlers for data lake synchronization</li>
-                <li>• <strong>Learning:</strong> Kafka / Distributed Systems Concurrency Models</li>
-                <li>• <strong>State:</strong> Mentzer Protocol — Leg Day Recovery</li>
+            <p class="section-title">Bookshelf</p>
+            <ul class="book-list">
+                <li>Data Engineering with AWS <span class="book-author">— Gareth Eagar</span></li>
+                <li>How to Read a Book <span class="book-author">— Mortimer J. Adler</span></li>
+                <li>Freedom from the Known <span class="book-author">— J. Krishnamurti</span></li>
+                <li>The Mustard Seed <span class="book-author">— OSHO</span></li>
+                <li>Sapiens: A Brief History of Humankind <span class="book-author">— Yuval Noah Harari</span></li>
+                <li>My Inventions: The Autobiography of Nikola Tesla <span class="book-author">— Nikola Tesla</span></li>
+                <li>White Nights <span class="book-author">— Fyodor Dostoevsky</span></li>
+                <li>Einstein: His Life and Universe <span class="book-author">— Walter Isaacson</span></li>
+                <li>The Godfather <span class="book-author">— Mario Puzo</span></li>
+                <li>The Theory of Everything <span class="book-author">— Stephen Hawking</span></li>
             </ul>
         </section>
 
         <section>
-            <h2>/Books</h2>
-            <ul>
-                <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[R]</span>&nbsp;Data Engineering with AWS</span>
-                    <span class="status-meta">Ch. 6 — S3 Partitioning Strategies &nbsp;<span class="status-bracket">(Reading)</span></span>
+            <p class="section-title">Projects</p>
+            <ul class="project-list">
+                <li>
+                    Kafka Pipeline Monitor
+                    <span class="project-desc">Real-time lag tracking across multiple consumer groups with alerting.</span>
                 </li>
-                <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[R]</span>&nbsp;How to Read a Book — Adler</span>
-                    <span class="status-meta">Ch. 14 — Syntopical Reading &nbsp;<span class="status-bracket">(Reading)</span></span>
+                <li>
+                    Data Quality Framework
+                    <span class="project-desc">Automated validation layer for Glue ETL jobs on S3 data lake.</span>
                 </li>
-                <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[D]</span>&nbsp;Tenet: Temporal Mechanics</span>
-                    <span class="status-meta">Synthesized 28-Mar-26 &nbsp;<span class="status-bracket">(Done)</span></span>
-                </li>
-                <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[Q]</span>&nbsp;Krishnamurti: Freedom</span>
-                    <span class="status-meta"><span class="status-bracket">(Queued)</span></span>
+                <li>
+                    Stream Reconciler
+                    <span class="project-desc">Compares source vs sink record counts for Kafka-to-S3 pipelines.</span>
                 </li>
             </ul>
         </section>
-
-
 
     </div>
 
@@ -294,27 +280,30 @@
         <a href="mailto:">Email</a>
     </footer>
 
-    <script>
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        const switcher = document.getElementById('mode-switcher');
+</div>
+<script>
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored || (prefersDark ? 'dark' : 'light');
+    const switcher = document.getElementById('mode-switcher');
 
-        if (currentTheme === 'dark') {
+    if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        switcher.textContent = 'light';
+    }
+
+    function toggleTheme() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            switcher.textContent = 'dark';
+        } else {
             document.documentElement.setAttribute('data-theme', 'dark');
-            switcher.textContent = 'LIGHT';
+            localStorage.setItem('theme', 'dark');
+            switcher.textContent = 'light';
         }
-
-        function toggleTheme() {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                switcher.textContent = 'DARK';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                switcher.textContent = 'LIGHT';
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
