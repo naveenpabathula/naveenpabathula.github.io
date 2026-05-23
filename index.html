@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Ledger & System Status</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+        /* System Color Tokens Matrix */
+        :root {
+            --bg-color: #F4F1EA;       /* Warm beige canvas */
+            --text-color: #1A1A1A;     /* Off-black primary */
+            --meta-color: #555555;     /* Slate gray metadata */
+            --dot-color: #A0A0A0;      /* Mid-gray grid dots */
+            --border-color: #1A1A1A;   /* Deep accent rules */
+            --footer-border: #DCD9D2;  /* Faint divider line */
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;       /* Deep matte black canvas */
+            --text-color: #EAEAEA;     /* Crisp off-white primary */
+            --meta-color: #A0A0A0;     /* Muted silver metadata */
+            --dot-color: #444444;      /* Low-contrast dark dots */
+            --border-color: #EAEAEA;   /* Bright accent rules */
+            --footer-border: #2A2A2A;  /* Dark subtle divider */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 4vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background-color 0.2s ease, color 0.2s ease; /* Fluid system shifting */
+        }
+
+        #ledger-container {
+            width: 100%;
+            max-width: 100%;
+            flex-grow: 1;
+        }
+
+        /* Header Engine & Integrated Toggle Link */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 48px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-title strong {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title span {
+            color: var(--meta-color);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+        }
+
+        .header-location {
+            color: var(--meta-color);
+            font-size: 14px;
+        }
+
+        /* Mode Controller Interface */
+        .theme-toggle {
+            cursor: pointer;
+            font-weight: 700;
+            user-select: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 14px;
+            padding: 0;
+        }
+        .theme-toggle::before { content: "["; color: var(--meta-color); }
+        .theme-toggle::after { content: "]"; color: var(--meta-color); }
+        .theme-toggle:hover { background-color: var(--text-color); color: var(--bg-color); }
+
+        /* Fluid Structural Sections */
+        section {
+            margin-bottom: 56px;
+        }
+
+        h2 {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 20px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        /* Elastic Data Connector Grid */
+        .ledger-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .ledger-target {
+            display: flex;
+            flex-grow: 1;
+            align-items: baseline;
+            font-weight: 500;
+        }
+
+        .ledger-target::after {
+            content: " ";
+            flex-grow: 1;
+            border-bottom: 1px dotted var(--dot-color);
+            margin: 0 16px;
+            position: relative;
+            top: -4px;
+        }
+
+        .status-meta {
+            color: var(--meta-color);
+            white-space: nowrap;
+        }
+
+        .status-bracket {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        /* Log Outputs Layout */
+        .log-entry {
+            margin-bottom: 24px;
+            max-width: 90%;
+        }
+
+        .log-date {
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .log-status {
+            color: var(--meta-color);
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        /* Navigation Matrix */
+        footer {
+            margin-top: auto;
+            padding-top: 32px;
+            border-top: 1px solid var(--footer-border);
+            display: flex;
+            justify-content: flex-start;
+            gap: 24px;
+            width: 100%;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        footer a::before { content: "["; color: var(--meta-color); }
+        footer a::after { content: "]"; color: var(--meta-color); }
+        
+        footer a:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        footer a:hover::before, footer a:hover::after { color: var(--bg-color); }
+
+        /* Responsiveness Overrides */
+        @media (max-width: 850px) {
+            body { padding: 24px; }
+            
+            header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+                margin-bottom: 32px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .header-title span {
+                display: block;
+                margin-left: 0;
+                margin-top: 4px;
+                font-size: 13px;
+            }
+
+            .ledger-row {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 16px;
+                border-bottom: 1px dashed var(--footer-border);
+                padding-bottom: 8px;
+            }
+
+            .ledger-target::after { display: none; }
+            .status-meta { margin-top: 4px; font-size: 13px; }
+            .log-entry { max-width: 100%; }
+            footer { justify-content: space-between; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ledger-container">
+        <header>
+            <div class="header-left">
+                <div class="header-title">
+                    <strong>[YOUR NAME]</strong> 
+                    <span>Digital Ledger & Personal Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-location">Hyderabad, India</div>
+                <button class="theme-toggle" id="mode-switcher" onclick="toggleTheme()">DARK</button>
+            </div>
+        </header>
+
+        <section>
+            <h2>/Now</h2>
+            <ul>
+                <li>• <strong>Work:</strong> Optimizing AWS Glue crawlers for data lake synchronization</li>
+                <li>• <strong>Learning:</strong> Kafka/Distributed Systems Concurrency Models</li>
+                <li>• <strong>State:</strong> Mentzer Protocol: Leg Day Recovery</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>/Reading Log</h2>
+            <ul>
+                <li class="ledger-row">
+                    <span class="ledger-target"><span class="status-bracket">[R]</span> Data Engineering with AWS</span>
+                    <span class="status-meta">Ch. 6 (S3 Partitioning Strategies) <span class="status-bracket">(Reading)</span></span>
+                </li>
+                <li class="ledger-row">
+                    <span class="ledger-target"><span class="status-bracket">[R]</span> How to Read a Book (Adler)</span>
+                    <span class="status-meta">Ch. 14 (Syntopical Reading) <span class="status-bracket">(Reading)</span></span>
+                </li>
+                <li class="ledger-row">
+                    <span class="ledger-target"><span class="status-bracket">[S]</span> Tenet: Temporal Mechanics</span>
+                    <span class="status-meta">Synthesized 28-Mar-26</span>
+                </li>
+                <li class="ledger-row">
+                    <span class="ledger-target"><span class="status-bracket">[Q]</span> Krishnamurti: Freedom</span>
+                    <span class="status-meta"><span class="status-bracket">Queued</span></span>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>/Observations</h2>
+            <div class="log-entry">
+                <span class="log-date">07-Apr-26:</span> The bottleneck in distributed systems engineering is frequently not network latency, but the cognitive overhead of managing consensus across volatile nodes. The simulation in my mind must match the system state. <span class="log-status">(Synthesizing)</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-date">05-Apr-26:</span> AWS Lambda cold start optimization for Python 3.11 functions—reducing import overhead by modularizing heavy dependencies improved execution latency by 190ms. <span class="log-status">(Verified)</span>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <a href="#">GitHub</a>
+        <a href="#">Notes</a>
+        <a href="#">Terminal</a>
+        <a href="#">Email</a>
+    </footer>
+
+    <script>
+        // Check local storage or system configuration for existing preference
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const switcher = document.getElementById('mode-switcher');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            switcher.textContent = 'LIGHT';
+        }
+
+        function toggleTheme() {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                switcher.textContent = 'DARK';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                switcher.textContent = 'LIGHT';
+            }
+        }
+    </script>
+</body>
+</html>
