@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Ledger & System Status</title>
+    <title>Naveen Pabathula</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
-        /* System Color Tokens Matrix */
         :root {
-            --bg-color: #F4F1EA;       /* Warm beige canvas */
-            --text-color: #1A1A1A;     /* Off-black primary */
-            --meta-color: #555555;     /* Slate gray metadata */
-            --dot-color: #A0A0A0;      /* Mid-gray grid dots */
-            --border-color: #1A1A1A;   /* Deep accent rules */
-            --footer-border: #DCD9D2;  /* Faint divider line */
+            --bg-color: #F4F1EA;
+            --text-color: #1A1A1A;
+            --meta-color: #555555;
+            --dot-color: #A0A0A0;
+            --border-color: #1A1A1A;
+            --footer-border: #DCD9D2;
         }
 
         [data-theme="dark"] {
-            --bg-color: #121212;       /* Deep matte black canvas */
-            --text-color: #EAEAEA;     /* Crisp off-white primary */
-            --meta-color: #A0A0A0;     /* Muted silver metadata */
-            --dot-color: #444444;      /* Low-contrast dark dots */
-            --border-color: #EAEAEA;   /* Bright accent rules */
-            --footer-border: #2A2A2A;  /* Dark subtle divider */
+            --bg-color: #121212;
+            --text-color: #EAEAEA;
+            --meta-color: #A0A0A0;
+            --dot-color: #444444;
+            --border-color: #EAEAEA;
+            --footer-border: #2A2A2A;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
@@ -42,7 +39,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: background-color 0.2s ease, color 0.2s ease; /* Fluid system shifting */
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         #ledger-container {
@@ -51,7 +48,6 @@
             flex-grow: 1;
         }
 
-        /* Header Engine & Integrated Toggle Link */
         header {
             display: flex;
             justify-content: space-between;
@@ -90,7 +86,6 @@
             font-size: 14px;
         }
 
-        /* Mode Controller Interface */
         .theme-toggle {
             cursor: pointer;
             font-weight: 700;
@@ -106,7 +101,6 @@
         .theme-toggle::after { content: "]"; color: var(--meta-color); }
         .theme-toggle:hover { background-color: var(--text-color); color: var(--bg-color); }
 
-        /* Fluid Structural Sections */
         section {
             margin-bottom: 56px;
         }
@@ -129,7 +123,35 @@
             margin-bottom: 12px;
         }
 
-        /* Elastic Data Connector Grid */
+        /* Bio section */
+        .bio-block {
+            max-width: 680px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .bio-block p {
+            margin: 0 0 12px 0;
+        }
+
+        .bio-tags {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .bio-tag {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border: 1px solid var(--border-color);
+            color: var(--meta-color);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Ledger rows */
         .ledger-row {
             display: flex;
             justify-content: space-between;
@@ -164,24 +186,7 @@
             font-weight: 700;
         }
 
-        /* Log Outputs Layout */
-        .log-entry {
-            margin-bottom: 24px;
-            max-width: 90%;
-        }
 
-        .log-date {
-            font-weight: 700;
-            margin-right: 8px;
-        }
-
-        .log-status {
-            color: var(--meta-color);
-            font-size: 13px;
-            font-style: italic;
-        }
-
-        /* Navigation Matrix */
         footer {
             margin-top: auto;
             padding-top: 32px;
@@ -201,17 +206,13 @@
 
         footer a::before { content: "["; color: var(--meta-color); }
         footer a::after { content: "]"; color: var(--meta-color); }
-        
-        footer a:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
+
+        footer a:hover { background-color: var(--text-color); color: var(--bg-color); }
         footer a:hover::before, footer a:hover::after { color: var(--bg-color); }
 
-        /* Responsiveness Overrides */
         @media (max-width: 850px) {
             body { padding: 24px; }
-            
+
             header {
                 flex-direction: column;
                 gap: 12px;
@@ -223,7 +224,7 @@
                 width: 100%;
                 justify-content: space-between;
             }
-            
+
             .header-title span {
                 display: block;
                 margin-left: 0;
@@ -243,6 +244,7 @@
             .status-meta { margin-top: 4px; font-size: 13px; }
             .log-entry { max-width: 100%; }
             footer { justify-content: space-between; gap: 8px; }
+            .bio-tags { gap: 6px; }
         }
     </style>
 </head>
@@ -252,8 +254,7 @@
         <header>
             <div class="header-left">
                 <div class="header-title">
-                    <strong>[YOUR NAME]</strong> 
-                    <span>Digital Ledger & Personal Dashboard</span>
+                    <strong>Naveen Pabathula</strong>
                 </div>
             </div>
             <div class="header-right">
@@ -263,59 +264,64 @@
         </header>
 
         <section>
+            <h2>/Bio</h2>
+            <div class="bio-block">
+                <p>Data Engineer and Technical Lead based in Hyderabad. Currently working on real-time data pipelines ingesting from multiple Kafka sources — testing, validating, and ensuring data integrity at scale.</p>
+                <p>Interested in the intersection of Data Engineering, AI, and Systems Architecture. Outside of work: reading books, building personal projects, and thinking about how systems — technical or otherwise — actually hold together.</p>
+                <div class="bio-tags">
+                    <span class="bio-tag">Data Engineering</span>
+                    <span class="bio-tag">AI</span>
+                    <span class="bio-tag">Systems Architecture</span>
+                    <span class="bio-tag">Kafka</span>
+                    <span class="bio-tag">AWS</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>/Now</h2>
             <ul>
                 <li>• <strong>Work:</strong> Optimizing AWS Glue crawlers for data lake synchronization</li>
-                <li>• <strong>Learning:</strong> Kafka/Distributed Systems Concurrency Models</li>
-                <li>• <strong>State:</strong> Mentzer Protocol: Leg Day Recovery</li>
+                <li>• <strong>Learning:</strong> Kafka / Distributed Systems Concurrency Models</li>
+                <li>• <strong>State:</strong> Mentzer Protocol — Leg Day Recovery</li>
             </ul>
         </section>
 
         <section>
-            <h2>/Reading Log</h2>
+            <h2>/Books</h2>
             <ul>
                 <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[R]</span> Data Engineering with AWS</span>
-                    <span class="status-meta">Ch. 6 (S3 Partitioning Strategies) <span class="status-bracket">(Reading)</span></span>
+                    <span class="ledger-target"><span class="status-bracket">[R]</span>&nbsp;Data Engineering with AWS</span>
+                    <span class="status-meta">Ch. 6 — S3 Partitioning Strategies &nbsp;<span class="status-bracket">(Reading)</span></span>
                 </li>
                 <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[R]</span> How to Read a Book (Adler)</span>
-                    <span class="status-meta">Ch. 14 (Syntopical Reading) <span class="status-bracket">(Reading)</span></span>
+                    <span class="ledger-target"><span class="status-bracket">[R]</span>&nbsp;How to Read a Book — Adler</span>
+                    <span class="status-meta">Ch. 14 — Syntopical Reading &nbsp;<span class="status-bracket">(Reading)</span></span>
                 </li>
                 <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[S]</span> Tenet: Temporal Mechanics</span>
-                    <span class="status-meta">Synthesized 28-Mar-26</span>
+                    <span class="ledger-target"><span class="status-bracket">[D]</span>&nbsp;Tenet: Temporal Mechanics</span>
+                    <span class="status-meta">Synthesized 28-Mar-26 &nbsp;<span class="status-bracket">(Done)</span></span>
                 </li>
                 <li class="ledger-row">
-                    <span class="ledger-target"><span class="status-bracket">[Q]</span> Krishnamurti: Freedom</span>
-                    <span class="status-meta"><span class="status-bracket">Queued</span></span>
+                    <span class="ledger-target"><span class="status-bracket">[Q]</span>&nbsp;Krishnamurti: Freedom</span>
+                    <span class="status-meta"><span class="status-bracket">(Queued)</span></span>
                 </li>
             </ul>
         </section>
 
-        <section>
-            <h2>/Observations</h2>
-            <div class="log-entry">
-                <span class="log-date">07-Apr-26:</span> The bottleneck in distributed systems engineering is frequently not network latency, but the cognitive overhead of managing consensus across volatile nodes. The simulation in my mind must match the system state. <span class="log-status">(Synthesizing)</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-date">05-Apr-26:</span> AWS Lambda cold start optimization for Python 3.11 functions—reducing import overhead by modularizing heavy dependencies improved execution latency by 190ms. <span class="log-status">(Verified)</span>
-            </div>
-        </section>
+
+
     </div>
 
     <footer>
-        <a href="#">GitHub</a>
-        <a href="#">Notes</a>
-        <a href="#">Terminal</a>
-        <a href="#">Email</a>
+        <a href="https://github.com/naveenpabathula" target="_blank">GitHub</a>
+        <a href="mailto:">Email</a>
     </footer>
 
     <script>
-        // Check local storage or system configuration for existing preference
         const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         const switcher = document.getElementById('mode-switcher');
-        
+
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             switcher.textContent = 'LIGHT';
