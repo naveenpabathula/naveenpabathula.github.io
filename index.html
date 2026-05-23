@@ -57,6 +57,8 @@
             margin-bottom: 48px;
         }
 
+
+
         .header-left {
             display: flex;
             align-items: baseline;
@@ -65,7 +67,7 @@
         }
 
         .header-title strong {
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: -0.5px;
@@ -132,23 +134,6 @@
 
         .bio-block p {
             margin: 0 0 12px 0;
-        }
-
-        .bio-tags {
-            margin-top: 16px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .bio-tag {
-            font-size: 12px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border: 1px solid var(--border-color);
-            color: var(--meta-color);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
         }
 
         /* Ledger rows */
@@ -258,23 +243,14 @@
                 </div>
             </div>
             <div class="header-right">
-                <div class="header-location">Hyderabad, India</div>
                 <button class="theme-toggle" id="mode-switcher" onclick="toggleTheme()">DARK</button>
             </div>
         </header>
 
         <section>
-            <h2>/Bio</h2>
             <div class="bio-block">
                 <p>Data Engineer and Technical Lead based in Hyderabad. Currently working on real-time data pipelines ingesting from multiple Kafka sources — testing, validating, and ensuring data integrity at scale.</p>
                 <p>Interested in the intersection of Data Engineering, AI, and Systems Architecture. Outside of work: reading books, building personal projects, and thinking about how systems — technical or otherwise — actually hold together.</p>
-                <div class="bio-tags">
-                    <span class="bio-tag">Data Engineering</span>
-                    <span class="bio-tag">AI</span>
-                    <span class="bio-tag">Systems Architecture</span>
-                    <span class="bio-tag">Kafka</span>
-                    <span class="bio-tag">AWS</span>
-                </div>
             </div>
         </section>
 
